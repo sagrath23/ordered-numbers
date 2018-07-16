@@ -19,6 +19,23 @@ export function toRes(res, status=200) {
 	};
 }
 
+const checkNumber = (numberToCheck) => {
+	const splitNumbers = `${numberToCheck}`.split('');
+	const sum = splitNumbers.reduce((prev, cur, index) => {
+		if(index) {
+			return cur >= splitNumbers[index -1] ? prev : prev +1;
+		} else {
+			return prev
+		}
+	}, 0);
+	return sum === 0;
+};
+
 export const checkLastOrderedNumber = (lastBound) => {
-	return lastBound;
+	let pivot = lastBound;
+	while(!checkNumber(pivot)) {
+		pivot --;
+	}
+	return pivot;
 }
+
