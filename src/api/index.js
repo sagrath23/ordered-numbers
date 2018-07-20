@@ -6,7 +6,7 @@ export default ({ config, db }) => {
 	let api = Router();
 
 	// mount the ordered-number resource
-	api.use('/ordered-number', facets({ config, db }));
+	api.use('/ordered-number/brute-force', facets({ config, db }));
 
 	// perhaps expose some API metadata at the root
 	api.get('/', (req, res) => {

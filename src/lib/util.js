@@ -31,7 +31,7 @@ const checkNumber = (numberToCheck) => {
 	return sum === 0;
 };
 
-export const checkLastOrderedNumber = (lastBound) => {
+export const checkLastOrderedNumberByBruteForce = (lastBound) => {
 	let pivot = lastBound;
 	while(!checkNumber(pivot)) {
 		pivot --;

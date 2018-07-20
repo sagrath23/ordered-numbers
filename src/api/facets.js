@@ -1,6 +1,6 @@
 import resource from 'resource-router-middleware';
 import facets from '../models/facets';
-import { checkLastOrderedNumber } from '../lib/util';
+import { checkLastOrderedNumberByBruteForce } from '../lib/util';
 
 export default ({ config, db }) => resource({
 
@@ -11,7 +11,7 @@ export default ({ config, db }) => resource({
 	 *  Errors terminate the request, success sets `req[id] = data`.
 	 */
 	load(req, id, callback) {
-		let facet = checkLastOrderedNumber(id),
+		let facet = checkLastOrderedNumberByBruteForce(id),
 			err = facet ? null : 'Not found!!!';
 		callback(err, facet);
 	},
