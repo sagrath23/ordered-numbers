@@ -1,3 +1,4 @@
+import { bases } from './bases';
 
 /**	Creates a callback that proxies node callback style arguments to an Express Response object.
  *	@param {express.Response} res	Express HTTP Response
@@ -39,3 +40,8 @@ export const checkLastOrderedNumberByBruteForce = (lastBound) => {
 	return pivot;
 }
 
+export const checkLastOrderedNumberByPattern = (lastbound) => {
+	//first, we get the number of digits of lastBound
+	const lastBoundLength = Math.log(number) * Math.LOG10E + 1 | 0;
+	
+};
