@@ -1,4 +1,4 @@
-import { bases } from './bases';
+import { bases, limits } from './bases';
 
 /**	Creates a callback that proxies node callback style arguments to an Express Response object.
  *	@param {express.Response} res	Express HTTP Response
@@ -32,6 +32,7 @@ const checkNumber = (numberToCheck) => {
 	return sum === 0;
 };
 
+// brute force
 export const checkLastOrderedNumberByBruteForce = (lastBound) => {
 	let pivot = lastBound;
 	while(!checkNumber(pivot)) {
@@ -40,8 +41,33 @@ export const checkLastOrderedNumberByBruteForce = (lastBound) => {
 	return pivot;
 }
 
-export const checkLastOrderedNumberByPattern = (lastbound) => {
-	//first, we get the number of digits of lastBound
-	const lastBoundLength = Math.log(number) * Math.LOG10E + 1 | 0;
-	
+export const checkLastOrderedNumberByPattern = (lastBound) => {
+	// first, we get the number of digits of lastBound
+	const lastBoundLength = Math.log(lastBound) * Math.LOG10E + 1 | 0,
+		baseNumber =`${lastBound}`;
+
+	//let result = `${lastBound}`;
+	const result = [];
+	console.log(`${lastBound} has ${lastBoundLength} digits`);
+	for(let i = 0; i < lastBoundLength; i++) {
+		console.log(`current digit: ${baseNumber[i]}`);
+		console.log(`matchPattern: ${limits[lastBoundLength - i]}`);
+		const innerBound = baseNumber[i] * limits[lastBoundLength - i];
+		console.log(`inner bound: ${innerBound}`);
+		if (lastBound < innerBound || innerBound === 0) {
+			console.log(`${lastBound} is in interval of ${innerBound} unordered numbers`);
+			result.push((baseNumber[i] - 1) > 0 ? (baseNumber[i] - 1) : 9);
+			lastBound = lastBound - (baseNumber[i] * bases[lastBoundLength - i]);
+			console.log(`new lastBound: ${lastBound}`);
+			console.log(`result state: ${result}`);
+		} else {
+			console.log(`${lastBound} isn't in interval of ${innerBound} unordered numbers`)
+			//pass to check next digit
+			result.push(baseNumber[i]);
+			lastBound = lastBound - (baseNumber[i] * bases[lastBoundLength - i]);
+			console.log(`new lastBound: ${lastBound}`);
+			console.log(`result state: ${result}`);
+		}
+	}
+	return Number(result.join(''));
 };
