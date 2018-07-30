@@ -32,7 +32,8 @@ const checkNumber = (numberToCheck) => {
 	return sum === 0;
 };
 
-// brute force
+// brute force: check if current number match with ordered number definition
+// if number don't match, then decrement by one and test again.
 export const checkLastOrderedNumberByBruteForce = (lastBound) => {
 	let pivot = lastBound;
 	while(!checkNumber(pivot)) {
@@ -48,25 +49,15 @@ export const checkLastOrderedNumberByPattern = (lastBound) => {
 
 	//let result = `${lastBound}`;
 	const result = [];
-	console.log(`${lastBound} has ${lastBoundLength} digits`);
 	for(let i = 0; i < lastBoundLength; i++) {
-		console.log(`current digit: ${baseNumber[i]}`);
-		console.log(`matchPattern: ${limits[lastBoundLength - i]}`);
 		const innerBound = baseNumber[i] * limits[lastBoundLength - i];
-		console.log(`inner bound: ${innerBound}`);
 		if (lastBound < innerBound || innerBound === 0) {
-			console.log(`${lastBound} is in interval of ${innerBound} unordered numbers`);
-			result.push((baseNumber[i] - 1) > 0 ? (baseNumber[i] - 1) : 9);
-			lastBound = lastBound - (baseNumber[i] * bases[lastBoundLength - i]);
-			console.log(`new lastBound: ${lastBound}`);
-			console.log(`result state: ${result}`);
+			result.push((baseNumber[i] * bases[lastBoundLength - i]) -1);
+			break;
 		} else {
-			console.log(`${lastBound} isn't in interval of ${innerBound} unordered numbers`)
 			//pass to check next digit
 			result.push(baseNumber[i]);
 			lastBound = lastBound - (baseNumber[i] * bases[lastBoundLength - i]);
-			console.log(`new lastBound: ${lastBound}`);
-			console.log(`result state: ${result}`);
 		}
 	}
 	return Number(result.join(''));
