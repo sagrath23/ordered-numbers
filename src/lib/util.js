@@ -1,4 +1,5 @@
 import { bases, limits } from './bases';
+import fs from 'fs';
 
 /**	Creates a callback that proxies node callback style arguments to an Express Response object.
  *	@param {express.Response} res	Express HTTP Response
@@ -61,4 +62,8 @@ export const checkLastOrderedNumberByPattern = (lastBound) => {
 		}
 	}
 	return Number(result.join(''));
+};
+
+export const readFileAsync = (filename) => {
+	return new Promise((resolve, reject) => (fs.readFile(filename, (error, data) => (error ? reject(error) : resolve(data)))));
 };
