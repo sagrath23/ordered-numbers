@@ -1,5 +1,8 @@
-Express & ES6 REST API Boilerplate
+PSL Programming Challenge #1: Ordered numbers
 ==================================
+Find the Highest ordered number closest to a specific number.
+An ordered number is a number that has all his digits ordered in ascendant way.
+122, 345, 999, 789 are good examples of a ordered number.
 
 This is a straightforward boilerplate for building REST APIs with ES6 and Express.
 
